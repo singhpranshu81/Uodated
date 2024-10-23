@@ -1,0 +1,32 @@
+<body class="bodyy">
+
+<table class="responsive-table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+            <td data-label="Order ID">1</td>
+            <td data-label="Date">{{date | date:'short'}}</td>
+            <td data-label="Status">Success</td><tr *ngFor="let fooditem of carty.food">
+                <!-- {{fooditem | json}} -->
+            <td data-label="Food Name"> {{fooditem.foodName}}</td>
+            <td data-label="Food Price">Price: {{fooditem.price  | currency:'INR'}}</td>
+            <td data-label="orderdQuantity ">OrderdQuantity: {{fooditem.orderdQuantity}}</td>
+        </tr>
+        <td data-label="Total Price">{{totalPrice   | currency:'INR'}}</td>
+    </tbody>
+    <!-- {{carty | json}}
+    <hr>
+    {{dummyOrder | json}} -->
+</table>
+<div class="return-dashboard">
+    <button (click)="returnToDashboard()">Return to Dashboard</button>
+</div>
+<div style="height: 100px;"></div>
+</body>

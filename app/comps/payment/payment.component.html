@@ -1,0 +1,92 @@
+<div class="payment-container">
+    <h2>Payment Options</h2>
+
+    <!-- Apple Pay Button -->
+     <form>
+        <input type="text" id="amount" name="amount" placeholder="Enter your Ipay Id">
+    <button class="apple-pay-button" (click)="processApplePay()">
+        <i class="fab fa-apple"></i> Pay
+    </button></form>
+    <div class="payment-message">
+        <p><b>Choose your preferred payment method.</b></p>
+        <!-- You can add more content here if needed -->
+    </div>
+
+    <!-- Toggle Card Payment Section -->
+    <button class="card-pay-button" (click)="toggleCardPayment()">
+       Pay with Card
+    </button>
+
+    <form [formGroup]="paymentForm" (ngSubmit)="processCardPayment()" *ngIf="showCardPayment">
+        <label for="email">Email:</label>
+        <input type="email" formControlName="email" required placeholder="Enter your email">
+
+        <div class="card-info">
+            <label for="cardNumber">Card Number:</label>
+            <div class="card-input-wrapper">
+                <input 
+                    type="text" 
+                    formControlName="cardNumber" 
+                    required 
+                    placeholder="1234 5678 9012 3456" 
+                    maxlength="19" 
+                    (input)="formatCardNumber()"
+                    aria-label="Card Number" 
+                    class="card-input"
+                />
+                <div class="card-logos">
+                    <img 
+                        src="../../../assets/card.png" 
+                        alt="Accepted Card Types" 
+                        class="card-logo" 
+                        width="100"  
+                        height="auto" 
+                    >
+                </div>
+        </div>
+        
+        
+        
+            <div *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched" class="error-message">
+              <b>Invalid card number.</b>
+            </div>
+        </div>
+
+        <div class="expiry-cvc">
+            <div>
+                <label for="expiryDate">Expiry Date (MM/YY):</label>
+                <input type="text" formControlName="expiryDate" required placeholder="MM/YY" maxlength="5" (input)="formatExpiryDate()">
+                <div *ngIf="paymentForm.get('expiryDate')?.invalid && paymentForm.get('expiryDate')?.touched" class="error-message">
+                    <b>Invalid expiry date.</b>
+                </div>
+            </div>
+            <div>
+                <label for="cvv">CVC:</label>
+                <input type="text" formControlName="cvv" required placeholder="123" maxlength="3">
+                <div *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched" class="error-message">
+                   <b>Invalid CVC.</b>
+                </div>
+            </div>
+        </div>
+
+        <label for="cardholderName">Cardholder Name:</label>
+        <input type="text" formControlName="cardholderName" required placeholder="John Doe">
+
+        <label for="country">Country/Region:</label>
+        <select formControlName="country" required>
+            <option value="" disabled selected>Select your country</option>
+            <option value="IN">India</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="UK">United Kingdom</option>
+            <option value="AU">Australia</option>
+            <!-- Add more countries as needed -->
+        </select>
+
+        <button type="submit" [disabled]="paymentForm.invalid">Submit Payment</button>
+    </form>
+
+    <div *ngIf="paymentSuccessMessage" class="success-message">
+        {{ paymentSuccessMessage }}
+    </div>
+</div>

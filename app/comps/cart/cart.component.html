@@ -1,0 +1,58 @@
+<!-- <p>Cart works!</p>
+
+{{ cart | json }} -->
+<body class="body">
+<section class="scrolling-alert-section">
+  <button (click)="goTODash()" class="btn btn-outline-info scrolling-alert" role="alert">
+    <b>Order Your Favorite Meals Today!Add More 🍕</b>
+  </button>
+</section>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        
+        <th>Food Name</th>
+        <th>Quantity</th>
+        <th>Price/Unit</th>
+        <th>Category</th>
+        <th>Total Price</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let foodItem of cart.food"> 
+        <!-- {{foodItem | json}} -->
+        <td>  <img
+          src="../../../assets/burger.png"
+          alt="Burger"
+          style="width: 50px; height: 50px; border-radius: 30%;margin-right: 13px;"
+        />{{ foodItem.foodName }}</td>
+        <td>
+          <div class="quantity-controls">
+            <button class="btn" (click)="decrement(foodItem)">-</button>
+            <span>{{ foodItem.orderdQuantity }}</span>
+            <button class="btn" (click)="increment(foodItem)">+</button>
+            <!-- <i class="fa fa-check" (click)="updateOrderQuantity(foodItem,foodItem.orderdQuantity)" style="margin-left: 5px; margin-top: 3px;" aria-hidden="true"></i> -->
+        </div>
+        </td>
+        <td>&#8377;{{ foodItem.price }}</td>
+        <td>{{ foodItem.category.categoryName }}</td>
+        <td>&#8377;{{ foodItem.price * foodItem.orderdQuantity }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteItem(foodItem)">Delete</button>
+      </tr>
+      <tr>
+        <td colspan="5" class="text-right font-weight-bold">Total Price:</td>
+        <td>&#8377;{{ getTotalPrice() }}</td>
+      </tr>
+    </tbody><div class="text-right">
+  <button (click)="goToOrderDetails()"  class="btn btn-success btn-sm">Place Order</button>
+<!-- {{dummyfood | json}} -->
+</div>
+  </table>
+
+</div>
+
+</body>

@@ -1,0 +1,60 @@
+<div class="body">
+  <div class="register-container">
+    <h2>Register</h2>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" required minlength="3" [(ngModel)]="registerModel.fullName" name="username" #username="ngModel" />
+        <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error">
+          <div *ngIf="username.errors?.['required']">Username is required.</div>
+          <div *ngIf="username.errors?.['minlength']">Username must be at least 3 characters long.</div>
+        </div>
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required email [(ngModel)]="registerModel.email" name="email" #email="ngModel" />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+          <div *ngIf="email.errors?.['required']">Email is required.</div>
+          <div *ngIf="email.errors?.['email']">Invalid email address.</div>
+        </div>
+      </div>
+      <div>
+        <label for="Mobile">Mobile No:</label>
+        <input type="text" id="Mobile" required pattern="^[0-9]{10}$" [(ngModel)]="registerModel.mobileNumber" name="mobile" #mobile="ngModel" />
+        <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="error">
+          <div *ngIf="mobile.errors?.['required']">Mobile number is required.</div>
+          <div *ngIf="mobile.errors?.['pattern']">Mobile number must be 10 digits.</div>
+        </div>
+      </div>
+      <div>
+        <label for="gender">Gender:</label>
+        <select id="gender" required [(ngModel)]="registerModel.gender" name="gender" #gender="ngModel">
+          <option value="" disabled selected>Select your gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="error">
+          <div *ngIf="gender.errors?.['required']">Gender is required.</div>
+        </div>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required minlength="6" [(ngModel)]="registerModel.password" name="password" #password="ngModel" />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
+          <div *ngIf="password.errors?.['required']">Password is required.</div>
+          <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</div>
+        </div>
+      </div>
+      <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword"  name="confirmPassword"  />
+     
+      </div>
+      <button type="submit" [disabled]="!registerForm.form.valid">Register</button>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </form>
+  </div>
+</div>
+<router-outlet></router-outlet>

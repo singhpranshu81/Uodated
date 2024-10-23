@@ -1,0 +1,23 @@
+<div class="body">
+    <div class="login-container">
+      <h3 style="text-align: center;">Otp Send To Registerd Email!!</h3>
+      <form #loginForm="ngForm">
+        <div>
+          <label for="username">Enter OTP:</label>
+          <input
+            type="number"
+            [(ngModel)]="xyz"
+            id="categoryName"
+            required
+            name="xyz"
+            placeholder="Enter Otp"
+          />
+        </div>
+        <button (click)="goToBill()" [disabled]="!loginForm.form.valid">
+          Verify
+        </button>
+  
+      </form>
+    </div>
+  </div>
+  

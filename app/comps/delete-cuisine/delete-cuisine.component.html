@@ -1,0 +1,34 @@
+<div class="body">
+    <div class="login-container">
+      <h3 style="text-align: center;">Delete Cuisine</h3>
+      <form #loginForm="ngForm">
+        <div>
+            
+          <label for="name">Cuisine Name:</label>
+          <input
+            type="text"
+            [(ngModel)]="name"
+            id="categoryName"
+            required
+            name="name"
+            placeholder="Enter Cuisine"
+          />
+        </div>
+        <div
+          *ngIf="
+            loginForm.form.invalid &&
+            (loginForm.form.dirty || loginForm.form.touched)
+          "
+        >
+          <small *ngIf="loginForm.form.errors?.['required']"
+            >All fields are required.</small
+          >
+        </div>
+        <button (click)="goToDash()" [disabled]="!loginForm.form.valid">
+       Delete Cuisine
+        </button>
+  
+      </form>
+    </div>
+  </div>
+  
